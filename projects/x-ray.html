@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-ray</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: white;
+            color: black;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        .logo {
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .logo a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .logo a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Page Title */
+        .page-title {
+            font-size: 3rem;
+            font-weight: normal;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Project Categories */
+        .category-section {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid black;
+        }
+
+        .category-title.nike { color: #FFB366; }
+        .category-title.commercial { color: #4A90E2; }
+        .category-title.intern { color: #4A90E2; }
+        .category-title.sponsored { color: #7ED321; }
+        .category-title.retail { color: #D0021B; }
+        .category-title.event { color: #D0021B; }
+        .category-title.popup { color: #BD10E0; }
+
+        /* Project Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            border: 1px solid #eee;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card .year {
+            color: #999;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            font-size: 18px;
+            border-top: 1px solid #eee;
+            padding-top: 40px;
+        }
+
+        .contact {
+            color: black;
+            text-decoration: none;
+        }
+
+        .contact:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                font-size: 16px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo"><a href="../index.html">ydesignspaces</a></h1>
+            <nav class="nav-links">
+                <a href="../index.html">HOME</a>
+                <a href="#info">INFO</a>
+            </nav>
+        </header>
+
+        <h1 class="page-title">Projects</h1>
+
+        <!-- Nike Projects -->
+        <div class="category-section">
+            <h2 class="category-title nike">Nike Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80" alt="Nike Next Gen Football">
+                    <h3>NIKE NEXT GEN FOOTBALL 2025</h3>
+                    <p>An immersive retail journey embodying a striker's twisted dream and a defender's worst nightmare. The Arena of Fear.</p>
+                    <div class="year">2025</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://freight.cargo.site/w/1000/i/b3899680c6539f735078093a5b6ee07fc3b91e7f4d61bef98cf96a4b1af94c2a/Nike_SP25_Maxxed_Out_HOI_8291v2_HI.jpg" alt="Nike AirMax DN8">
+                    <h3>NIKE AIRMAX DN8 2025</h3>
+                    <p>Experiments of Unreal Movement. Transport athletes into an immersive journey where Experimentations of Unreal Movement redefine the boundaries of sport and innovation.</p>
+                    <div class="year">2025</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nike Air for Athletes">
+                    <h3>NIKE AIR FOR ATHLETES 2024</h3>
+                    <p>Transport Athletes to the heart of product innovation. Create sensational spaces that journey between dreams to reality and truly leverage the Power of Air.</p>
+                    <div class="year">2024</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nike Pegasus 41">
+                    <h3>NIKE PEGASUS 41 RUNNING SEP 2024</h3>
+                    <p>This is our running hub. High energy is all about harnessing the power of Pegasus through a disruptive experience focused on the transference of kinetic energy.</p>
+                    <div class="year">2024</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nike Pegasus 41 June">
+                    <h3>NIKE PEGASUS 41 RUNNING JUNE 2024</h3>
+                    <p>Retail Experience Creative Direction</p>
+                    <div class="year">2024</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80" alt="Nike World Cup">
+                    <h3>NIKE WORLDCUP 2023</h3>
+                    <p>Retail Experience Creative Direction</p>
+                    <div class="year">2023</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commercial Projects -->
+        <div class="category-section">
+            <h2 class="category-title commercial">Commercial Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Milly Rock">
+                    <h3>MILLY ROCK</h3>
+                    <p>Commercial project showcasing innovative design solutions.</p>
+                    <div class="year">2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sponsored Projects -->
+        <div class="category-section">
+            <h2 class="category-title sponsored">Sponsored Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Genesis">
+                    <h3>GENESIS</h3>
+                    <p>Sponsored project focusing on luxury automotive experiences.</p>
+                    <div class="year">2024</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Under Armour">
+                    <h3>UNDER ARMOUR</h3>
+                    <p>Athletic brand collaboration focusing on performance and innovation.</p>
+                    <div class="year">2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Retail & Event Projects -->
+        <div class="category-section">
+            <h2 class="category-title retail">Retail & Event Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Upyard">
+                    <h3>UPYARD</h3>
+                    <p>Retail space design and experience creation.</p>
+                    <div class="year">2024</div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80" alt="AWA">
+                    <h3>AWA</h3>
+                    <p>Event design and activation experience.</p>
+                    <div class="year">2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup Projects -->
+        <div class="category-section">
+            <h2 class="category-title popup">Popup Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nike Waffle">
+                    <h3>NIKE WAFFLE</h3>
+                    <p>Popup experience design and activation.</p>
+                    <div class="year">2024</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <a href="mailto:ydesignspaces@gmail.com" class="contact">ydesignspaces@gmail.com</a>
+            <div class="copyright">©Yenny Zhang</div>
+        </footer>
+    </div>
+</body>
+</html>
