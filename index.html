@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>monica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: white;
+            color: black;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        .logo {
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Project container */
+        .project-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        /* Project List Styles */
+        .project-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 60px;
+        }
+
+        .project-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            cursor: pointer;
+            padding: 4px 0;
+            flex-wrap: wrap;
+        }
+
+        .arrow {
+            font-size: 1.8rem;
+            margin-top: 2px;
+            user-select: none;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .arrow.nike { color: #FFB366; }
+        .arrow.commercial { color: #4A90E2; }
+        .arrow.intern { color: #4A90E2; }
+        .arrow.sponsored { color: #7ED321; }
+        .arrow.retail { color: #D0021B; }
+        .arrow.event { color: #D0021B; }
+        .arrow.furniture { color: #D0021B; }
+        .arrow.motion { color: #D0021B; }
+        .arrow.sustainability { color: #D0021B; }
+        .arrow.exhibition { color: #D0021B; }
+        .arrow.hospitality { color: #D0021B; }
+        .arrow.popup { color: #BD10E0; }
+
+        .project-link {
+            color: black;
+            text-decoration: none;
+            font-weight: normal;
+            line-height: 1.3;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-title {
+            font-weight: normal;
+            font-size: 2.2rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .project-category {
+            font-weight: normal;
+            font-size: 1.4rem;
+            opacity: 0.7;
+        }
+
+        /* Project Details Section */
+        .project-details-section {
+            margin-top: 40px;
+        }
+
+        /* Fixed image display area for hover */
+        .image-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        .project-image.active {
+            opacity: 1;
+        }
+
+        /* Grid System */
+        [grid-row] {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        [grid-col] {
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        [grid-col="1"] { flex: 0 0 8.333%; }
+        [grid-col="2"] { flex: 0 0 16.666%; }
+        [grid-col="3"] { flex: 0 0 25%; }
+        [grid-col="4"] { flex: 0 0 33.333%; }
+        [grid-col="5"] { flex: 0 0 41.666%; }
+        [grid-col="6"] { flex: 0 0 50%; }
+        [grid-col="7"] { flex: 0 0 58.333%; }
+        [grid-col="8"] { flex: 0 0 66.666%; }
+        [grid-col="9"] { flex: 0 0 75%; }
+        [grid-col="10"] { flex: 0 0 83.333%; }
+        [grid-col="11"] { flex: 0 0 91.666%; }
+        [grid-col="12"] { flex: 0 0 100%; }
+
+        [grid-pad="4"] {
+            padding: 16px;
+        }
+
+        [grid-gutter="8"] > [grid-col] {
+            margin: 0 4px;
+        }
+
+        /* Image Links */
+        .image-link {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .image-link img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-transition-fade {
+            opacity: 1;
+        }
+
+        /* Hover Titles */
+        .hover-title {
+            font-size: 14px;
+            line-height: 1.4;
+            color: black;
+        }
+
+        .hover-title b {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .hover-title small {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            font-size: 18px;
+        }
+
+        .contact {
+            color: black;
+            text-decoration: none;
+        }
+
+        .contact:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            /* Project list mobile styles */
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .project-category {
+                font-size: 1.2rem;
+            }
+
+            .arrow {
+                font-size: 1.5rem;
+            }
+
+            /* Stack grid columns vertically on mobile */
+            [grid-row] {
+                flex-direction: column;
+                margin-bottom: 30px;
+            }
+
+            [grid-col] {
+                flex: 1 0 100%;
+                margin: 0 !important;
+            }
+
+            [grid-pad="4"] {
+                padding: 8px;
+            }
+
+            .hover-title {
+                font-size: 12px;
+            }
+
+            .hover-title b {
+                font-size: 14px;
+            }
+
+            /* Mobile image container adjustments */
+            .image-container {
+                width: 80%;
+                height: 50vh;
+                right: 10%;
+            }
+
+            .project-image {
+                width: 110%;
+                height: 100%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                font-size: 16px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">Monica Hsieh</h1>
+            <nav class="nav-links">
+                <a href="#archive">ARCHIVE</a>
+                <a href="#info">INFO</a>
+            </nav>
+        </header>
+
+        <div class="project-container">
+            <!-- Original Project List -->
+            <ul class="project-list">
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">EPHEMERAL IDENTITIES</span> <span class="project-category">(brand experience)</span>
+                    </a>
+                </li>
+                
+                <li class="project-item" data-image="images/X-RAY/01.jpg">
+                    <span class="arrow nike">↗</span>
+                    <a href="x-ray.html" class="project-link">
+                        <span class="project-title">COLO COFFEE: KONG</span> <span class="project-category">(pop up)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">FROM RUNWAY TO STOREFRONT</span> <span class="project-category">(retail research)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">OUROBOROS</span> <span class="project-category">(CMLA intern project)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="images/X-RAY/01.jpg">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">X-RAY</span> <span class="project-category">(scenography)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="images/WW/WW_01.jpg">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">WATER WAVE</span> <span class="project-category">(scenography)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="images/DEST/DEST_01.jpg">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">DESTINATION</span> <span class="project-category">(scenography)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="images/ETB/ETB_01.jpg">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">EXTENDING THE BODY: ELASTIC BLOOM</span> <span class="project-category">(experimental garments)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">INTERWELLNESS</span> <span class="project-category">(brand)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2012&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">MARK, UNFOLD, METAPHOR</span> <span class="project-category">(plaza)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">NEWLY ICON</span> <span class="project-category">(museum)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1993&q=80">
+                    <span class="arrow nike">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">THE HIVE LIVING</span> <span class="project-category">(house)</span>
+                    </a>
+                </li>
+
+                <li class="project-item" data-image="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                    <span class="arrow commercial">↗</span>
+                    <a href="#" class="project-link">
+                        <span class="project-title">LAYER BY LAYER</span> <span class="project-category">(hospitality)</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+            <!-- Grid-based Project Details Section -->
+            <div class="project-details-section">
+                <!-- NIKE AIRMAX DN8 2025 Project -->
+                <div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
+                    <div grid-col="8" grid-pad="4" class="">
+                        <a href="AIRMAX-DN8" rel="history" class="image-link">
+                            <img width="8192" height="4608" width_o="8192" height_o="4608" 
+                                 data-src="https://freight.cargo.site/t/original/i/b3899680c6539f735078093a5b6ee07fc3b91e7f4d61bef98cf96a4b1af94c2a/Nike_SP25_Maxxed_Out_HOI_8291v2_HI.jpg" 
+                                 data-mid="237394938" border="0" class="scroll-transition-fade" 
+                                 src="//freight.cargo.site/w/1000/i/b3899680c6539f735078093a5b6ee07fc3b91e7f4d61bef98cf96a4b1af94c2a/Nike_SP25_Maxxed_Out_HOI_8291v2_HI.jpg" 
+                                 style="width: 882.078px; height: 496.169px; transition-duration: initial;">
+                        </a>
+                    </div>
+                    <div grid-col="3" grid-pad="4" class="">
+                        <div class="hover-title">
+                            <small><b>NIKE AIRMAX DN8 2025</b><br>
+                            Retail Experience Creative Direction</small>
+                            <br>
+                            <small><br>000<br>Transport athletes* into an immersive journey where Experimentations of Unreal Movement redefine the boundaries of sport and innovation. More Dynamic Air, more Unreal Movement.</small>
+                        </div>
+                    </div>
+                    <div grid-col="1" grid-pad="4"></div>
+                </div>
+
+                <!-- NIKE NEXT GEN FOOTBALL 2025 Project -->
+                <div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
+                    <div grid-col="8" grid-pad="4" class="">
+                        <a href="NEXT-GEN-FOOTBALL" rel="history" class="image-link">
+                            <img width="8192" height="4608" width_o="8192" height_o="4608" 
+                                 border="0" class="scroll-transition-fade" 
+                                 src="images/X-RAY/01.jpg"
+                                 style="width: 882.078px; height: 496.169px; transition-duration: initial;">
+                        </a>
+                    </div>
+                    <div grid-col="3" grid-pad="4" class="">
+                        <div class="hover-title">
+                            <small><b>NIKE NEXT GEN FOOTBALL 2025</b><br>
+                            Retail Experience Creative Direction</small>
+                            <br>
+                            <small><br>An immersive retail journey embodying a striker's twisted dream and a defender's worst nightmare. The Arena of Fear.</small>
+                        </div>
+                    </div>
+                    <div grid-col="1" grid-pad="4"></div>
+                </div>
+
+                <!-- NIKE AIR FOR ATHLETES 2024 Project -->
+                <div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
+                    <div grid-col="8" grid-pad="4" class="">
+                        <a href="AIR-FOR-ATHLETES" rel="history" class="image-link">
+                            <img width="8192" height="4608" width_o="8192" height_o="4608" 
+                                 data-src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 border="0" class="scroll-transition-fade" 
+                                 src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 style="width: 882.078px; height: 496.169px; transition-duration: initial;">
+                        </a>
+                    </div>
+                    <div grid-col="3" grid-pad="4" class="">
+                        <div class="hover-title">
+                            <small><b>NIKE AIR FOR ATHLETES 2024</b><br>
+                            Retail Experience Creative Direction</small>
+                            <br>
+                            <small><br>Transport Athletes* to the heart of product innovation. Create sensational* spaces that journey between dreams to reality and truly leverage the Power of Air.</small>
+                        </div>
+                    </div>
+                    <div grid-col="1" grid-pad="4"></div>
+                </div>
+
+                <!-- NIKE PEGASUS 41 RUNNING SEP 2024 Project -->
+                <div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
+                    <div grid-col="8" grid-pad="4" class="">
+                        <a href="PEGASUS-41-SEP" rel="history" class="image-link">
+                            <img width="8192" height="4608" width_o="8192" height_o="4608" 
+                                 data-src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 border="0" class="scroll-transition-fade" 
+                                 src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 style="width: 882.078px; height: 496.169px; transition-duration: initial;">
+                        </a>
+                    </div>
+                    <div grid-col="3" grid-pad="4" class="">
+                        <div class="hover-title">
+                            <small><b>NIKE PEGASUS 41 RUNNING SEP 2024</b><br>
+                            Retail Experience Creative Direction</small>
+                            <br>
+                            <small><br>This is our running hub. High energy is all about harnessing the power of Pegasus through a disruptive experience focused on the transference of kinetic energy, from product to runner.</small>
+                        </div>
+                    </div>
+                    <div grid-col="1" grid-pad="4"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <!-- Images will be displayed here on hover -->
+        </div>
+
+        <footer class="footer">
+            <a href="mailto:ydesignspaces@gmail.com" class="contact">ydesignspaces@gmail.com</a>
+            <div class="copyright">©Yenny Zhang</div>
+        </footer>
+    </div>
+
+    <script>
+        // Image hover functionality for project list
+        const projectItems = document.querySelectorAll('.project-item');
+        const imageContainer = document.querySelector('.image-container');
+
+        projectItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const imageUrl = this.getAttribute('data-image');
+                if (imageUrl) {
+                    // Remove any existing images
+                    const existingImages = imageContainer.querySelectorAll('.project-image');
+                    existingImages.forEach(img => img.remove());
+
+                    // Create and add new image
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.className = 'project-image active';
+                    imageContainer.appendChild(img);
+                }
+            });
+
+            item.addEventListener('mouseleave', function() {
+                // Fade out image
+                const activeImage = imageContainer.querySelector('.project-image.active');
+                if (activeImage) {
+                    activeImage.classList.remove('active');
+                    setTimeout(() => {
+                        if (activeImage.parentNode) {
+                            activeImage.remove();
+                        }
+                    }, 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
