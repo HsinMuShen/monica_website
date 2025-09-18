@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.ico
+*.webp
+
+# Fonts
+*.woff
+*.woff2
+*.ttf
+*.otf
+
+# Other
+*.min.js
+*.min.css
+LICENSE
