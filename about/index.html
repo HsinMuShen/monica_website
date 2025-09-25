@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Monica Hsieh</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ff006e 0%,
+          #8338ec 50%,
+          #3a86ff 100%
+        );
+        color: white;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 60px;
+        font-size: 24px;
+        font-weight: normal;
+      }
+
+      .logo {
+        font-style: italic;
+        font-weight: normal;
+      }
+
+      .logo a {
+        color: black;
+        text-decoration: none;
+      }
+
+      .logo a:hover {
+        text-decoration: underline;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        color: black;
+        text-decoration: none;
+        font-weight: normal;
+      }
+
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Main Content Layout */
+      .about-layout {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 60px;
+        align-items: start;
+        margin-bottom: 60px;
+      }
+
+      .main-content {
+        position: relative;
+      }
+
+      /* Photo */
+      .about-photo {
+        float: left;
+        width: 280px;
+        height: 400px;
+        margin: 0 40px 20px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        object-fit: cover;
+        shape-outside: inset(0 0 0 0);
+      }
+
+      /* Main Text */
+      .main-text {
+        font-size: 4.5rem;
+        font-weight: 700;
+        line-height: 0.95;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        margin-bottom: 2rem;
+        text-align: left;
+      }
+
+      .secondary-text {
+        font-size: 4.5rem;
+        font-weight: 700;
+        line-height: 0.95;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        margin-top: 3rem;
+        clear: both;
+      }
+
+      .highlight-pink {
+        color: #ff006e;
+      }
+
+      .highlight-yellow {
+        color: #ffbe0b;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        position: sticky;
+        top: 40px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .contact-info {
+        margin-bottom: 40px;
+        text-align: right;
+      }
+
+      .contact-info p {
+        margin-bottom: 5px;
+      }
+
+      .contact-info a {
+        color: white;
+        text-decoration: underline;
+      }
+
+      .sidebar-section {
+        margin-bottom: 35px;
+        text-align: right;
+      }
+
+      .sidebar-title {
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .emoji {
+        font-size: 16px;
+      }
+
+      .sidebar-content {
+        font-size: 13px;
+        line-height: 1.5;
+        opacity: 0.9;
+      }
+
+      .sidebar-content p {
+        margin-bottom: 8px;
+      }
+
+      .sidebar-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sidebar-list li {
+        margin-bottom: 4px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .about-layout {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .sidebar {
+          position: static;
+          text-align: left;
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          padding-top: 40px;
+        }
+
+        .sidebar-section {
+          text-align: left;
+        }
+
+        .sidebar-title {
+          justify-content: flex-start;
+        }
+
+        .contact-info {
+          text-align: left;
+        }
+
+        .main-text {
+          font-size: 3.5rem;
+        }
+
+        .secondary-text {
+          font-size: 3.5rem;
+        }
+
+        .about-photo {
+          width: 220px;
+          height: 320px;
+          margin: 0 30px 20px 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .header {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+          font-size: 20px;
+        }
+
+        .nav-links {
+          gap: 20px;
+        }
+
+        .main-text {
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .secondary-text {
+          font-size: 2.5rem;
+          margin-top: 2rem;
+        }
+
+        .about-photo {
+          float: none;
+          width: 200px;
+          height: 280px;
+          margin: 0 auto 30px auto;
+          display: block;
+        }
+
+        .sidebar {
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          padding-top: 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .main-text {
+          font-size: 2rem;
+        }
+
+        .secondary-text {
+          font-size: 2rem;
+        }
+
+        .about-photo {
+          width: 160px;
+          height: 220px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="logo"><a href="../index.html">Monica Hsieh</a></h1>
+        <nav class="nav-links">
+          <a href="../index.html">HOME</a>
+          <a href="index.html">ABOUT</a>
+        </nav>
+      </header>
+
+      <div class="about-layout">
+        <main class="main-content">
+          <img
+            src="../images/NEWLY/01.jpg"
+            alt="Monica Hsieh"
+            class="about-photo"
+          />
+
+          <div class="main-text">
+            MONICA HSIEH IS AN
+            <span class="highlight-pink">ARCHITECT</span> WITH A FOCUS ON
+            <span class="highlight-yellow">ADAPTIVE</span> DESIGN,
+            <span class="highlight-pink">SUSTAINABLE</span>
+            LIVING, AND INNOVATIVE
+            <span class="highlight-yellow">HOUSING</span> TYPOLOGIES. SHE
+            SPECIALIZES IN CREATING
+            <span class="highlight-pink">HUMAN-SCALE</span>
+            ARCHITECTURAL INTERVENTIONS.
+          </div>
+
+          <div class="secondary-text">
+            MONICA IS CURRENTLY A
+            <span class="highlight-pink">LICENSED</span> ARCHITECT AND
+            <span class="highlight-yellow">RESEARCHER</span>
+            EXPLORING THE INTERSECTION OF ARCHITECTURE AND
+            <span class="highlight-pink">COMMUNITY</span> LIVING.
+          </div>
+        </main>
+
+        <aside class="sidebar">
+          <div class="contact-info">
+            <p>Reach out at</p>
+            <p>
+              <a href="mailto:ydesignspaces@gmail.com"
+                >ydesignspaces@gmail.com</a
+              >
+            </p>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">
+              <span class="emoji">🤩</span>
+              SERVICES
+            </h3>
+            <div class="sidebar-content">
+              <p>Residential Design</p>
+              <p>Co-Housing Planning</p>
+              <p>Adaptive Architecture</p>
+              <p>Sustainable Design</p>
+              <p>Site Analysis</p>
+              <p>Community Planning</p>
+              <p>Design Research</p>
+              <p>3D Visualization</p>
+              <p>Construction Documentation</p>
+              <p>Project Management</p>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">
+              <span class="emoji">🤓</span>
+              CAPABILITIES
+            </h3>
+            <div class="sidebar-content">
+              <p>3D Modeling (Rhino, SketchUp)</p>
+              <p>Architectural Visualization</p>
+              <p>AutoCAD</p>
+              <p>Adobe Creative Suite</p>
+              <p>Revit/BIM</p>
+              <p>Sustainable Design Strategies</p>
+              <p>Code Analysis</p>
+              <p>Construction Administration</p>
+              <p>Research & Analysis</p>
+              <p>Presentation Design</p>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">
+              <span class="emoji">😍</span>
+              CLIENTS
+            </h3>
+            <div class="sidebar-content">
+              <p>
+                Syracuse University, Urban Planning Collective, Sustainable
+                Design Group, Private Residential Clients, Community Housing
+                Organizations
+              </p>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">
+              <span class="emoji">😄</span>
+              AWARDS/ARTICLES
+            </h3>
+            <div class="sidebar-content">
+              <p>Emerging Architect Award</p>
+              <p>Sustainable Design Excellence</p>
+              <p>Community Impact Recognition</p>
+              <p>Featured in ArchDaily</p>
+              <p>Design Innovation Award</p>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">
+              <span class="emoji">👁</span>
+              FORMERLY
+            </h3>
+            <div class="sidebar-content">
+              <p>• Senior Architect at Studio Architecture</p>
+              <p>• Design Architect at Urban Planning Collective</p>
+              <p>• Junior Architect at Sustainable Design Group</p>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">
+              <span class="emoji">✌🏼</span>
+              CURRENTLY
+            </h3>
+            <div class="sidebar-content">
+              <p>• Principal Architect at Monica Hsieh Architecture</p>
+              <p>• Adjunct Lecturer in Sustainable Design</p>
+              <p>• Research Collaborator on Community Housing Projects</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
