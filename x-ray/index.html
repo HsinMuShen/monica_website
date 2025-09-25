@@ -99,14 +99,29 @@
         width: 100%;
         margin: 0 0 60px 0;
         text-align: center;
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+      }
+
+      /* Fallback for browsers without aspect-ratio support */
+      @supports not (aspect-ratio: 16 / 10) {
+        .project-hero-image {
+          padding-bottom: 62.5%; /* 16:10 aspect ratio */
+          height: 0;
+        }
+
+        .project-hero-image img {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
       }
 
       .project-hero-image img {
         width: 100%;
-        height: auto;
-        max-height: 500px;
+        height: 100%;
         object-fit: cover;
-        border-radius: 8px;
       }
 
       /* Desktop Layout: Title Left, Description Right */
@@ -269,9 +284,7 @@
 
       .image-section img {
         width: 100%;
-        max-width: 800px;
         height: auto;
-        border-radius: 8px;
         object-fit: cover;
       }
 
@@ -284,13 +297,10 @@
       .video-container {
         position: relative;
         width: 100%;
-        max-width: 1000px;
         margin: 0 auto;
         padding-bottom: 56.25%; /* 16:9 aspect ratio */
         height: 0;
         overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         background: #f8f8f8;
       }
 
@@ -301,7 +311,6 @@
         width: 100%;
         height: 100%;
         border: none;
-        border-radius: 8px;
       }
 
       .video-title {
@@ -316,9 +325,6 @@
         font-size: 1rem;
         color: #666;
         margin-top: 15px;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
         line-height: 1.6;
         text-align: center;
       }
@@ -631,11 +637,6 @@
           margin-bottom: 40px;
         }
 
-        .project-hero-image img {
-          max-height: 300px;
-          border-radius: 6px;
-        }
-
         .project-subtitle {
           font-size: 1.5rem;
           font-weight: normal;
@@ -787,24 +788,13 @@
           margin: 40px 0;
         }
 
-        .image-section img {
-          max-width: 100%;
-          border-radius: 6px;
-        }
-
         /* Mobile video sections */
         .video-section {
           margin: 40px 0;
         }
 
         .video-container {
-          max-width: 100%;
-          border-radius: 6px;
           box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .video-container iframe {
-          border-radius: 6px;
         }
 
         .video-title {

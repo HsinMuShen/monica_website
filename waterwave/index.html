@@ -99,14 +99,29 @@
         width: 100%;
         margin: 0 0 60px 0;
         text-align: center;
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+      }
+
+      /* Fallback for browsers without aspect-ratio support */
+      @supports not (aspect-ratio: 16 / 10) {
+        .project-hero-image {
+          padding-bottom: 62.5%; /* 16:10 aspect ratio */
+          height: 0;
+        }
+
+        .project-hero-image img {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
       }
 
       .project-hero-image img {
         width: 100%;
-        height: auto;
-        max-height: 500px;
+        height: 100%;
         object-fit: cover;
-        border-radius: 8px;
       }
 
       /* Desktop Layout: Title Left, Description Right */
@@ -269,10 +284,49 @@
 
       .image-section img {
         width: 100%;
-        max-width: 800px;
         height: auto;
-        border-radius: 8px;
         object-fit: cover;
+      }
+
+      /* Video Section */
+      .video-section {
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        background: #f8f8f8;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+      }
+
+      .video-description {
+        font-size: 1rem;
+        color: #666;
+        margin-top: 15px;
+        line-height: 1.6;
+        text-align: center;
       }
 
       /* Image Gallery Carousel */
@@ -583,11 +637,6 @@
           margin-bottom: 40px;
         }
 
-        .project-hero-image img {
-          max-height: 300px;
-          border-radius: 6px;
-        }
-
         .project-subtitle {
           font-size: 1.5rem;
           font-weight: normal;
@@ -739,9 +788,25 @@
           margin: 40px 0;
         }
 
-        .image-section img {
-          max-width: 100%;
-          border-radius: 6px;
+        /* Mobile video sections */
+        .video-section {
+          margin: 40px 0;
+        }
+
+        .video-container {
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-title {
+          font-size: 1.1rem;
+          margin-bottom: 15px;
+        }
+
+        .video-description {
+          font-size: 0.95rem;
+          margin-top: 12px;
+          text-align: left;
+          padding: 0 10px;
         }
       }
     </style>
@@ -774,7 +839,12 @@
 
           <div class="project-description-section">
             <p class="project-description">
-              This installation was conceived as a spatial response to the historical and environmental context of the Erie Canal. By reinterpreting the rhythmic movement of water, the project aims to evoke the memory of the canal’s past while offering a sensory experience that unfolds at night—inviting visitors to engage with the site through light, motion, and atmosphere.
+              This installation was conceived as a spatial response to the
+              historical and environmental context of the Erie Canal. By
+              reinterpreting the rhythmic movement of water, the project aims to
+              evoke the memory of the canal’s past while offering a sensory
+              experience that unfolds at night—inviting visitors to engage with
+              the site through light, motion, and atmosphere.
             </p>
           </div>
         </div>
@@ -970,9 +1040,15 @@
         </ul>
 
         <div class="project-section">
-          <h4 class="section-title">Light as Movement: Capturing motion with light and time</h4>
+          <h4 class="section-title">
+            Light as Movement: Capturing motion with light and time
+          </h4>
           <p class="section-content">
-            The design uses rope lights anchored along both sides of the canal to trace the flow of waves. Through long-exposure photography, we captured dynamic, wave-like visuals formed by the interaction of light and water, transforming the canal into a temporal, immersive space.
+            The design uses rope lights anchored along both sides of the canal
+            to trace the flow of waves. Through long-exposure photography, we
+            captured dynamic, wave-like visuals formed by the interaction of
+            light and water, transforming the canal into a temporal, immersive
+            space.
           </p>
         </div>
 
@@ -1010,6 +1086,24 @@
 
         <div class="image-section">
           <img src="../images/x-ray/01.jpg" alt="Atrium Co-Living Space" />
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="Waterwave Project Video"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            >
+            </iframe>
+          </div>
+          <p class="video-description">
+            This video showcases the design process and key concepts behind the
+            Waterwave project, demonstrating the innovative approach to
+            architectural design and community integration.
+          </p>
         </div>
 
         <!-- Gallery Slideshow -->
@@ -1098,7 +1192,6 @@
                       </div>
                     </div>
                   </figure>
-
                 </div>
               </div>
 
@@ -1196,7 +1289,7 @@
                   />
                 </div>
               </button>
-              
+
               <button class="gallery-slideshow-thumbnails-thumb" data-slide="3">
                 <span hidden>Slide 3</span>
                 <div class="gallery-slideshow-thumbnails-image-wrapper">
@@ -1208,14 +1301,15 @@
                   />
                 </div>
               </button>
-
             </div>
           </div>
         </div>
 
         <div class="project-nav">
           <a href="#" class="nav-link">← Previous: Naked Room</a>
-          <a href="../destination/index.html" class="nav-link">Next: DESTINATION →</a>
+          <a href="../destination/index.html" class="nav-link"
+            >Next: DESTINATION →</a
+          >
         </div>
       </div>
 
