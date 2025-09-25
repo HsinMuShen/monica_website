@@ -275,6 +275,54 @@
         object-fit: cover;
       }
 
+      /* Video Section */
+      .video-section {
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background: #f8f8f8;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 8px;
+      }
+
+      .video-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+      }
+
+      .video-description {
+        font-size: 1rem;
+        color: #666;
+        margin-top: 15px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        text-align: center;
+      }
+
       /* Image Gallery Carousel */
       .gallery-slideshow {
         margin: 60px 0;
@@ -743,6 +791,33 @@
           max-width: 100%;
           border-radius: 6px;
         }
+
+        /* Mobile video sections */
+        .video-section {
+          margin: 40px 0;
+        }
+
+        .video-container {
+          max-width: 100%;
+          border-radius: 6px;
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+          border-radius: 6px;
+        }
+
+        .video-title {
+          font-size: 1.1rem;
+          margin-bottom: 15px;
+        }
+
+        .video-description {
+          font-size: 0.95rem;
+          margin-top: 12px;
+          text-align: left;
+          padding: 0 10px;
+        }
       }
     </style>
   </head>
@@ -1029,6 +1104,25 @@
           <img src="../images/x-ray/01.jpg" alt="Atrium Co-Living Space" />
         </div>
 
+        <!-- Video Section -->
+        <div class="video-section">
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/9Uo4QvDG2qA"
+              title="X-RAY Project Video"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            >
+            </iframe>
+          </div>
+          <p class="video-description">
+            This video showcases the design process and key concepts behind the
+            X-RAY adaptive co-housing typology project, demonstrating how the
+            architectural intervention creates human-scale cohabitation within
+            the challenging terrain.
+          </p>
+        </div>
+
         <!-- Gallery Slideshow -->
         <div class="gallery-slideshow">
           <div class="gallery-slideshow-wrapper">
@@ -1115,7 +1209,6 @@
                       </div>
                     </div>
                   </figure>
-
                 </div>
               </div>
 
@@ -1213,7 +1306,7 @@
                   />
                 </div>
               </button>
-              
+
               <button class="gallery-slideshow-thumbnails-thumb" data-slide="3">
                 <span hidden>Slide 3</span>
                 <div class="gallery-slideshow-thumbnails-image-wrapper">
@@ -1225,14 +1318,15 @@
                   />
                 </div>
               </button>
-
             </div>
           </div>
         </div>
 
         <div class="project-nav">
           <a href="#" class="nav-link">← Previous: Naked Room</a>
-          <a href="../destination/index.html" class="nav-link">Next: DESTINATION →</a>
+          <a href="../destination/index.html" class="nav-link"
+            >Next: DESTINATION →</a
+          >
         </div>
       </div>
 
