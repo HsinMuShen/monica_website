@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>X-RAY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background-color: white;
+        color: black;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 60px;
+        font-size: 24px;
+        font-weight: normal;
+      }
+
+      .logo {
+        font-style: italic;
+        font-weight: normal;
+      }
+
+      .logo a {
+        color: black;
+        text-decoration: none;
+      }
+
+      .logo a:hover {
+        text-decoration: underline;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        color: black;
+        text-decoration: none;
+        font-weight: normal;
+      }
+
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Project Title */
+      .project-title {
+        font-size: 3.5rem;
+        font-weight: normal;
+        margin-bottom: 10px;
+      }
+
+      .project-subtitle {
+        font-size: 1.5rem;
+        font-weight: normal;
+        color: #666;
+        margin-bottom: 50px;
+      }
+
+      .project-question {
+        font-size: 1.8rem;
+        font-weight: normal;
+        margin-bottom: 40px;
+        font-style: italic;
+        color: #333;
+        line-height: 1.3;
+      }
+
+      /* Project Content */
+      .project-content {
+        max-width: 1080px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      /* Hero Image */
+      .project-hero-image {
+        width: 100%;
+        margin: 0 0 60px 0;
+        text-align: center;
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+      }
+
+      /* Fallback for browsers without aspect-ratio support */
+      @supports not (aspect-ratio: 16 / 10) {
+        .project-hero-image {
+          padding-bottom: 62.5%; /* 16:10 aspect ratio */
+          height: 0;
+        }
+
+        .project-hero-image img {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      .project-hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Desktop Layout: Title Left, Description Right */
+      .project-header {
+        display: flex;
+        gap: 80px;
+        align-items: flex-start;
+        margin-bottom: 40px;
+      }
+
+      .project-title-section {
+        width: 100%;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .project-description-section {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .project-description {
+        font-size: 1.1rem;
+        margin-bottom: 0;
+        text-align: justify;
+      }
+
+      /* Accordion Styles */
+      .accordion-items-container {
+        list-style: none;
+        margin: 60px 0;
+        padding: 0;
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .accordion-item:first-child {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .accordion-divider {
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.1);
+        opacity: 0.5;
+      }
+
+      .accordion-item__click-target {
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 19px 0 15px 0;
+        font-family: inherit;
+        outline: none;
+      }
+
+      .accordion-item__click-target:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      .accordion-item__title {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding-right: 14px;
+        text-align: left;
+      }
+
+      .accordion-icon-container {
+        height: 14px;
+        width: 14px;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .plus {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .plus__horizontal-line,
+      .plus__vertical-line {
+        position: absolute;
+        background-color: #333;
+        transition: transform 0.3s ease;
+      }
+
+      .plus__horizontal-line {
+        width: 100%;
+        height: 1.5px;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+
+      .plus__vertical-line {
+        width: 1.5px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .accordion-icon-container[data-is-open="true"] .plus__vertical-line {
+        transform: translateX(-50%) rotate(90deg);
+        opacity: 0;
+      }
+
+      .accordion-item__dropdown {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .accordion-item__dropdown.active {
+        max-height: 200px;
+      }
+
+      .accordion-item__description {
+        padding: 0 0 30px 0;
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.6;
+        min-width: 70%;
+        max-width: 300px;
+      }
+
+      /* Project Sections */
+      .project-section {
+        margin-bottom: 50px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .section-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: justify;
+      }
+
+      /* Simple Image Sections */
+      .image-section {
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .image-section img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      /* Video Section */
+      .video-section {
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        background: #f8f8f8;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+      }
+
+      .video-description {
+        font-size: 1rem;
+        color: #666;
+        margin-top: 15px;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      /* Image Gallery Carousel */
+      .gallery-slideshow {
+        margin: 60px 0;
+        position: relative;
+        background: white;
+        border-radius: 8px;
+      }
+
+      .gallery-slideshow-wrapper {
+        position: relative;
+        padding: 20px;
+        min-height: 400px;
+      }
+
+      .gallery-slideshow-container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .gallery-slideshow-main {
+        flex: 1;
+        position: relative;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #f8f8f8;
+        /* Fallback for browsers without aspect-ratio support */
+        padding-bottom: 62.5%; /* 16:10 aspect ratio (10/16 * 100%) */
+      }
+
+      /* Modern browsers with aspect-ratio support */
+      @supports (aspect-ratio: 16 / 10) {
+        .gallery-slideshow-main {
+          aspect-ratio: 16 / 10;
+          padding-bottom: 0;
+        }
+      }
+
+      .gallery-slideshow-list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* When aspect-ratio is supported, use relative positioning */
+      @supports (aspect-ratio: 16 / 10) {
+        .gallery-slideshow-list {
+          position: relative;
+        }
+      }
+
+      .gallery-slideshow-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .gallery-slideshow-item.active {
+        opacity: 1;
+      }
+
+      .gallery-slideshow-item-wrapper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .gallery-slideshow-item-src {
+        width: 100%;
+        height: 100%;
+      }
+
+      .gallery-slideshow-item-img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .gallery-slideshow-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease;
+        display: block;
+      }
+
+      .gallery-slideshow-item:hover img {
+        transform: scale(1.02);
+      }
+
+      /* Gallery Controls - Left and Right of Image */
+      .gallery-slideshow-control {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .gallery-slideshow-control-btn {
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-slideshow-control-btn:hover {
+        background: rgba(255, 255, 255, 0.95);
+        transform: scale(1.05);
+      }
+
+      .gallery-slideshow-control-btn:active {
+        transform: scale(0.95);
+      }
+
+      .gallery-slideshow-control-btn svg {
+        width: 14px;
+        height: 14px;
+        stroke: #333;
+        stroke-width: 2;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-slideshow-control-btn:hover svg {
+        stroke: #000;
+      }
+
+      /* Mobile controls (hidden on desktop) */
+      .gallery-slideshow-mobile-controls {
+        display: none;
+      }
+
+      /* Gallery Thumbnails */
+      .gallery-slideshow-thumbnails {
+        padding: 30px 20px 20px;
+        background: white;
+      }
+
+      .gallery-slideshow-thumbnails-scroll {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+      }
+
+      .gallery-slideshow-thumbnails-thumb {
+        width: 80px;
+        height: 80px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: none;
+        padding: 0;
+      }
+
+      .gallery-slideshow-thumbnails-thumb:hover {
+        transform: scale(1.05);
+        border-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-slideshow-thumbnails-thumb.active {
+        border-color: #333;
+      }
+
+      .gallery-slideshow-thumbnails-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-slideshow-thumbnails-thumb:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Legacy gallery images */
+      .gallery-image {
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+      }
+
+      /* Navigation */
+      .project-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 60px 0 40px 0;
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+      }
+
+      .nav-link {
+        color: #666;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      .nav-link:hover {
+        text-decoration: underline;
+        color: #333;
+      }
+
+      /* Footer */
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 60px;
+        font-size: 18px;
+        border-top: 1px solid #eee;
+        padding-top: 40px;
+      }
+
+      .contact {
+        color: black;
+        text-decoration: none;
+      }
+
+      .contact:hover {
+        text-decoration: underline;
+      }
+
+      .copyright {
+        opacity: 0.7;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .header {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+          font-size: 20px;
+        }
+
+        .nav-links {
+          gap: 20px;
+        }
+
+        .page-title {
+          font-size: 2.5rem;
+          text-align: center;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .footer {
+          flex-direction: column;
+          gap: 10px;
+          text-align: center;
+          font-size: 16px;
+        }
+
+        .project-title {
+          font-size: 2.5rem;
+          text-align: center;
+        }
+
+        .project-question {
+          font-size: 1.4rem;
+          line-height: 1.3;
+        }
+
+        /* Mobile: Stack title and description vertically */
+        .project-header {
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .project-title {
+          font-size: 2.5rem;
+          text-align: center;
+        }
+
+        .project-hero-image {
+          margin-bottom: 40px;
+        }
+
+        .project-subtitle {
+          font-size: 1.5rem;
+          font-weight: normal;
+          color: #666;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .project-question {
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .project-description {
+          text-align: left;
+        }
+
+        .accordion-items-container {
+          margin: 40px 0;
+        }
+
+        .accordion-item__title {
+          font-size: 0.8rem;
+        }
+
+        .project-nav {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .gallery-slideshow-wrapper {
+          padding: 15px;
+          min-height: auto;
+          width: 100%;
+        }
+
+        .gallery-slideshow {
+          width: 100%;
+          margin: 40px 0;
+        }
+
+        .gallery-slideshow-container {
+          flex-direction: column;
+          gap: 20px;
+          align-items: stretch;
+          max-width: none;
+          width: 100%;
+        }
+
+        .gallery-slideshow-main {
+          width: 100%;
+          flex: none;
+          border-radius: 8px;
+          overflow: hidden;
+          background: #f8f8f8;
+          /* Maintain same aspect ratio on mobile */
+          padding-bottom: 62.5%; /* 16:10 aspect ratio */
+        }
+
+        /* Modern mobile browsers with aspect-ratio support */
+        @supports (aspect-ratio: 16 / 10) {
+          .gallery-slideshow-main {
+            aspect-ratio: 16 / 10;
+            padding-bottom: 0;
+          }
+        }
+
+        .gallery-slideshow-list {
+          width: 100%;
+          height: 100%;
+        }
+
+        .gallery-slideshow-item {
+          width: 100% !important;
+          height: 100% !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .gallery-slideshow-item-wrapper,
+        .gallery-slideshow-item-src,
+        .gallery-slideshow-item-img {
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        .gallery-slideshow-item img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+        }
+
+        /* Ensure figure elements don't collapse */
+        figure.gallery-slideshow-item {
+          margin: 0;
+          padding: 0;
+          width: 100% !important;
+          height: 100% !important;
+          flex-shrink: 0;
+        }
+
+        /* Hide desktop side controls on mobile */
+        .gallery-slideshow-control {
+          display: none;
+        }
+
+        /* Show mobile controls below image */
+        .gallery-slideshow-mobile-controls {
+          display: flex !important;
+          justify-content: center;
+          gap: 40px;
+          margin-top: 20px;
+        }
+
+        .gallery-slideshow-control-btn {
+          width: 45px;
+          height: 45px;
+        }
+
+        .gallery-slideshow-control-btn svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .gallery-slideshow-thumbnails-thumb {
+          width: 70px;
+          height: 70px;
+        }
+
+        .gallery-slideshow-thumbnails-scroll {
+          gap: 15px;
+        }
+
+        /* Disable hover effects on mobile for better touch experience */
+        .gallery-slideshow-item:hover img {
+          transform: none;
+        }
+
+        .gallery-slideshow-thumbnails-thumb:hover img {
+          transform: none;
+        }
+
+        /* Mobile image sections */
+        .image-section {
+          margin: 40px 0;
+        }
+
+        /* Mobile video sections */
+        .video-section {
+          margin: 40px 0;
+        }
+
+        .video-container {
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-title {
+          font-size: 1.1rem;
+          margin-bottom: 15px;
+        }
+
+        .video-description {
+          font-size: 0.95rem;
+          margin-top: 12px;
+          text-align: left;
+          padding: 0 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="logo"><a href="../index.html">Monica Hsieh</a></h1>
+        <nav class="nav-links">
+          <a href="../index.html">HOME</a>
+          <a href="#info">INFO</a>
+        </nav>
+      </header>
+
+      <div class="project-content">
+        <!-- Hero Image -->
+        <div class="project-hero-image">
+          <img src="../images/NEWLY/06.jpg" alt="Slope House Hero" />
+        </div>
+
+        <!-- Desktop: Title Left, Description Right -->
+        <div class="project-header">
+          <div class="project-title-section">
+            <h1 class="project-title">NEWLY ICON</h1>
+            <h2 class="project-subtitle">Museum</h2>
+            <h3 class="project-question">A new art museum, a new operational model</h3>
+          </div>
+
+          <div class="project-description-section">
+            <p class="project-description">
+              This design is an expansion project for Taipei Fine Arts Museum, aiming to address the issue of insufficient collection space in the existing pavilion. A new art museum is being constructed on the east side of the existing pavilion, utilizing the land previously used as a parking lot. In addition to resolving the problem of collection space, the more crucial aspect is the exploration of dialogue between the new and old art museums. Confronting the evolving forms of exhibitions in the rapidly changing future, we are gaining new perspectives and interpretations for the future of the art museum.
+            </p>
+          </div>
+        </div>
+
+        <ul
+          class="accordion-items-container"
+          data-should-allow-multiple-open-items="true"
+        >
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-year"
+                aria-controls="dropdown-year"
+              >
+                <span class="accordion-item__title">YEAR</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-year"
+              aria-labelledby="button-year"
+            >
+              <div class="accordion-item__description">
+                <p>2020</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-type"
+                aria-controls="dropdown-type"
+              >
+                <span class="accordion-item__title">TYPE</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-type"
+              aria-labelledby="button-type"
+            >
+              <div class="accordion-item__description">
+                <p>Studio Project (NCKU)</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-program"
+                aria-controls="dropdown-program"
+              >
+                <span class="accordion-item__title">PROGRAM</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-program"
+              aria-labelledby="button-program"
+            >
+              <div class="accordion-item__description">
+                <p>Museum</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-location"
+                aria-controls="dropdown-location"
+              >
+                <span class="accordion-item__title">LOCATION</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-location"
+              aria-labelledby="button-location"
+            >
+              <div class="accordion-item__description">
+                <p>
+                  Taipei, Taiwan
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-instructor"
+                aria-controls="dropdown-instructor"
+              >
+                <span class="accordion-item__title">INSTRUCTOR</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-instructor"
+              aria-labelledby="button-instructor"
+            >
+              <div class="accordion-item__description">
+                <p>Kuang-Ting, Wu</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="project-section">
+          <h4 class="section-title">Using the art museum's operational model as a design strategy</h4>
+          <p class="section-content">
+            The expanded art museum offers a wider variety of exhibition spaces, as well as commercial activities and spaces to support the museum's operations, making the activities here more diverse.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/newly/13.jpg" alt="Co-living Landscape" />
+          <img src="../images/newly/14.jpg" alt="Co-living Landscape" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">
+            Layered Circulation and Programmatic Connections
+          </h4>
+          <p class="section-content">
+            A sloped volume links the old and new museum lobbies, serving as an auction and event hall. Exhibition spaces are placed above, while a semi-outdoor zone below remains publicly accessible. Elevated walkways connect the sections at different heights, creating visual interaction across levels and linking the library, event slope, and circulation spaces.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/NEWLY/02.jpg" alt="Co-living Landscape" />
+          <img src="../images/NEWLY/04.jpg" alt="Co-living Landscape" />
+          <img src="../images/NEWLY/03.jpg" alt="Co-living Landscape" />
+          <img src="../images/NEWLY/01.jpg" alt="Co-living Landscape" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Iconic Contrast and Landmark Identity</h4>
+          <p class="section-content">
+            The entire volumns presents an image distinct from the understated and restrained character of the old art museum. The new addition adopts an iconic design as a bold contrasting response, aiming to convey the image of a landmark building.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/NEWLY/15.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Circular exhibition space</h4>
+          <p class="section-content">
+            Narrow skylights create a dimmer indoor atmosphere, while the circular space's strong visual continuity makes it ideal for use as a digital exhibition venue.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/NEWLY/10.jpg" alt="Atrium Co-Living Space" />
+          <img src="../images/NEWLY/08.jpg" alt="Atrium Co-Living Space" />
+          <img src="../images/NEWLY/09.jpg" alt="Atrium Co-Living Space" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Urban Engagement and Art Visibility</h4>
+          <p class="section-content">
+            The corners of the site feature two circular volumns that engage with the urban environment. Projections on the curved walls allow the artwork to be visible beyond just the visitors within the space.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/NEWLY/11.jpg" alt="Atrium Co-Living Space" />
+          <img src="../images/NEWLY/07.jpg" alt="Atrium Co-Living Space" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Multipurpose Slope and Museum Connection</h4>
+          <p class="section-content">
+            In addition to serving as an auction venue, the sloped space also functions as the main connecting area to the grand corridor of the old art museum, making it suitable for multipurpose use.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/NEWLY/12.jpg" alt="Atrium Co-Living Space" />
+        </div>
+
+        <div class="project-nav">
+          <a href="#" class="nav-link">← Previous: Naked Room</a>
+          <a href="../destination/index.html" class="nav-link"
+            >Next: DESTINATION →</a
+          >
+        </div>
+      </div>
+
+      <footer class="footer">
+        <a href="mailto:ydesignspaces@gmail.com" class="contact"
+          >ydesignspaces@gmail.com</a
+        >
+        <div class="copyright">©Yenny Zhang</div>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Accordion functionality
+        const accordionButtons = document.querySelectorAll(
+          ".accordion-item__click-target"
+        );
+
+        accordionButtons.forEach(button => {
+          button.addEventListener("click", function () {
+            const isExpanded = this.getAttribute("aria-expanded") === "true";
+            const dropdown = document.getElementById(
+              this.getAttribute("aria-controls")
+            );
+            const icon = this.querySelector(".accordion-icon-container");
+
+            if (isExpanded) {
+              this.setAttribute("aria-expanded", "false");
+              dropdown.classList.remove("active");
+              icon.setAttribute("data-is-open", "false");
+            } else {
+              this.setAttribute("aria-expanded", "true");
+              dropdown.classList.add("active");
+              icon.setAttribute("data-is-open", "true");
+            }
+          });
+        });
+
+        // Gallery slideshow functionality
+        const slides = document.querySelectorAll(".gallery-slideshow-item");
+        const thumbnails = document.querySelectorAll(
+          ".gallery-slideshow-thumbnails-thumb"
+        );
+        const prevBtn = document.querySelector(
+          ".gallery-slideshow-control-prev .gallery-slideshow-control-btn"
+        );
+        const nextBtn = document.querySelector(
+          ".gallery-slideshow-control-next .gallery-slideshow-control-btn"
+        );
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          // Hide all slides
+          slides.forEach(slide => slide.classList.remove("active"));
+          thumbnails.forEach(thumb => thumb.classList.remove("active"));
+
+          // Show current slide
+          if (slides[index]) {
+            slides[index].classList.add("active");
+          }
+          if (thumbnails[index]) {
+            thumbnails[index].classList.add("active");
+          }
+
+          currentSlide = index;
+        }
+
+        function nextSlide() {
+          const next = (currentSlide + 1) % slides.length;
+          showSlide(next);
+        }
+
+        function prevSlide() {
+          const prev = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(prev);
+        }
+
+        // Event listeners for desktop controls
+        if (nextBtn) {
+          nextBtn.addEventListener("click", nextSlide);
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener("click", prevSlide);
+        }
+
+        // Event listeners for mobile controls
+        const mobilePrevBtn = document.querySelector(".mobile-prev-btn");
+        const mobileNextBtn = document.querySelector(".mobile-next-btn");
+
+        if (mobileNextBtn) {
+          mobileNextBtn.addEventListener("click", nextSlide);
+        }
+
+        if (mobilePrevBtn) {
+          mobilePrevBtn.addEventListener("click", prevSlide);
+        }
+
+        // Event listeners for thumbnails
+        thumbnails.forEach((thumb, index) => {
+          thumb.addEventListener("click", () => showSlide(index));
+        });
+
+        // Auto-advance slides (optional)
+        // setInterval(nextSlide, 5000);
+      });
+    </script>
+  </body>
+</html>
