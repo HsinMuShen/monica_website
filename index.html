@@ -354,13 +354,31 @@
           font-size: 1rem;
         }
 
+        .project-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 6px;
+        }
+
+        .arrow {
+          width: 1.2rem;
+          height: 1.2rem;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
         .project-link {
+          flex: 1;
+          min-width: 0;
+          display: flex;
           flex-wrap: wrap;
           gap: 2px;
         }
 
-        .arrow {
-          display: none;
+        .project-title {
+          font-size: 1.3rem;
+          flex-shrink: 1;
+          min-width: 0;
         }
 
         /* Stack grid columns vertically on mobile */
