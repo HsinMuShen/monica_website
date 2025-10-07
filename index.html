@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monica Hsieh</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       * {
         margin: 0;
@@ -15,8 +18,8 @@
       }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
         background-color: white;
         color: black;
         line-height: 1.6;
@@ -111,7 +114,7 @@
         color: #243d67;
       }
       .arrow.razzmatazz {
-        color: #FF006E;
+        color: #ff006e;
       }
       .arrow.silver.linings {
         color: #e2e1e7;
@@ -344,15 +347,38 @@
 
         /* Project list mobile styles */
         .project-title {
-          font-size: 2rem;
+          font-size: 1.5rem;
         }
 
         .project-category {
-          font-size: 1.2rem;
+          font-size: 1rem;
+        }
+
+        .project-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 6px;
         }
 
         .arrow {
-          display: none;
+          width: 1.2rem;
+          height: 1.2rem;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .project-link {
+          flex: 1;
+          min-width: 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2px;
+        }
+
+        .project-title {
+          font-size: 1.3rem;
+          flex-shrink: 1;
+          min-width: 0;
         }
 
         /* Stack grid columns vertically on mobile */
@@ -392,6 +418,19 @@
           transform: translate(-50%, -50%);
         }
 
+        /* Fix image overflow on mobile */
+        .image-link img {
+          width: 100% !important;
+          height: auto !important;
+          max-width: 100%;
+        }
+
+        /* Ensure all images fit within viewport */
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+
         .footer {
           flex-direction: column;
           gap: 10px;
@@ -403,21 +442,23 @@
   </head>
   <body>
     <div class="container">
-        <header class="header">
-            <h1 class="logo"><a href="index.html">Monica Hsieh</a></h1>
-            <nav class="nav-links">
-                <a href="about/index.html">ABOUT</a>
-            </nav>
-        </header>
+      <header class="header">
+        <h1 class="logo"><a href="index.html">Monica Hsieh</a></h1>
+        <nav class="nav-links">
+          <a href="about/index.html">ABOUT</a>
+        </nav>
+      </header>
 
       <div class="project-container">
         <!-- Original Project List -->
         <ul class="project-list">
-
           <li class="project-item" data-image="images/KONG/kong_01.png">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./kong/index.html" class="project-link">
@@ -429,21 +470,27 @@
           <li class="project-item" data-image="images/CH/ch_01.jpg">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./ch/index.html" class="project-link">
               <span class="project-title">CHILLHOUSE</span>
-              <span class="project-category">(Ringo Studio intern project: retail store)</span>
+              <span class="project-category"
+                >(Ringo Studio intern project: retail store)</span
+              >
             </a>
           </li>
 
-          <li
-            class="project-item"
-            data-image="images/FRTS/RUN_04.jpg">
+          <li class="project-item" data-image="images/FRTS/RUN_04.jpg">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./runway/index.html" class="project-link">
@@ -455,7 +502,10 @@
           <li class="project-item" data-image="images/X-RAY/01.jpg">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./x-ray/index.html" class="project-link">
@@ -467,7 +517,10 @@
           <li class="project-item" data-image="images/WW/WW_01.jpg">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./waterwave/index.html" class="project-link">
@@ -479,7 +532,10 @@
           <li class="project-item" data-image="images/DEST/DEST_01.jpg">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./destination/index.html" class="project-link">
@@ -491,23 +547,27 @@
           <li class="project-item" data-image="images/ETB/00.jpg">
             <span class="arrow spritz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./extending/index.html" class="project-link">
-              <span class="project-title"
-                >EXTENDING THE BODY</span>
-              <span class="project-category">(Experimental Garment Installation)</span>
+              <span class="project-title">EXTENDING THE BODY</span>
+              <span class="project-category"
+                >(Experimental Garment Installation)</span
+              >
             </a>
           </li>
 
-          <li
-            class="project-item"
-            data-image="images/THESIS/00.jpg"
-          >
+          <li class="project-item" data-image="images/THESIS/00.jpg">
             <span class="arrow deep-sea">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./thesis/index.html" class="project-link">
@@ -516,13 +576,13 @@
             </a>
           </li>
 
-          <li
-            class="project-item"
-            data-image="images/NEWLY/06.jpg"
-          >
+          <li class="project-item" data-image="images/NEWLY/06.jpg">
             <span class="arrow deep-sea">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./newly/index.html" class="project-link">
@@ -531,13 +591,13 @@
             </a>
           </li>
 
-          <li
-            class="project-item"
-            data-image="images/HIVE/000.jpg"
-          >
+          <li class="project-item" data-image="images/HIVE/000.jpg">
             <span class="arrow deep-sea">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./hive/index.html" class="project-link">
@@ -546,13 +606,13 @@
             </a>
           </li>
 
-          <li
-            class="project-item"
-            data-image="images/LAYER/00.jpg"
-          >
+          <li class="project-item" data-image="images/LAYER/00.jpg">
             <span class="arrow razzmatazz">
               <svg viewBox="0 0 32 32">
-                <path fill="currentColor" d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M 6.70 8.28 L 8.28 6.70 L 20.50 18.92 L 22.48 21.07 L 22.24 17.98 L 22.19 11.86 L 24.36 11.86 L 24.52 24.51 L 11.86 24.36 L 11.88 22.17 L 18.01 22.25 L 21.10 22.47 L 18.92 20.50 L 6.70 8.28 Z"
+                ></path>
               </svg>
             </span>
             <a href="./layer/index.html" class="project-link">
@@ -594,7 +654,10 @@
                 >
                 <br />
                 <small
-                  ><br />Pop-up shop design combining Syracuse University’s School of Architecture and Colo Coffee from Colombia. Inspired by the idea of a temple, the space blends daily rituals with moments of meditation.</small
+                  ><br />Pop-up shop design combining Syracuse University’s
+                  School of Architecture and Colo Coffee from Colombia. Inspired
+                  by the idea of a temple, the space blends daily rituals with
+                  moments of meditation.</small
                 >
               </div>
             </div>
@@ -629,7 +692,9 @@
                 >
                 <br />
                 <small
-                  ><br />Retail design for Chillhouse, a modern beauty brand centered on self-care and lifestyle. The space merges a nail salon and café into one cohesive environment.</small
+                  ><br />Retail design for Chillhouse, a modern beauty brand
+                  centered on self-care and lifestyle. The space merges a nail
+                  salon and café into one cohesive environment.</small
                 >
               </div>
             </div>
@@ -665,7 +730,11 @@
                 >
                 <br />
                 <small
-                  ><br />Research on the evolution of runway shows as performative spaces shaped by changing relationships between models and audiences. The study culminates in a peep-show model that reinterprets the act of viewing and informs future approaches to retail design.</small
+                  ><br />Research on the evolution of runway shows as
+                  performative spaces shaped by changing relationships between
+                  models and audiences. The study culminates in a peep-show
+                  model that reinterprets the act of viewing and informs future
+                  approaches to retail design.</small
                 >
               </div>
             </div>
@@ -701,7 +770,10 @@
                 >
                 <br />
                 <small
-                  ><br />Installation design based on the concept of “reveal,” exploring how hidden elements can be perceived through shadow. The work invites viewers to experience space indirectly, uncovering what is usually unseen.</small
+                  ><br />Installation design based on the concept of “reveal,”
+                  exploring how hidden elements can be perceived through shadow.
+                  The work invites viewers to experience space indirectly,
+                  uncovering what is usually unseen.</small
                 >
               </div>
             </div>
@@ -737,7 +809,11 @@
                 >
                 <br />
                 <small
-                  ><br />Installation inspired by the historical and environmental context of the Erie Canal. The design reinterprets the rhythmic movement of water to evoke memory and create a nocturnal experience of light, motion, and atmosphere.</small
+                  ><br />Installation inspired by the historical and
+                  environmental context of the Erie Canal. The design
+                  reinterprets the rhythmic movement of water to evoke memory
+                  and create a nocturnal experience of light, motion, and
+                  atmosphere.</small
                 >
               </div>
             </div>
@@ -747,7 +823,11 @@
           <!-- NIKE PEGASUS 41 RUNNING SEP 2024 Project -->
           <div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
             <div grid-col="8" grid-pad="4" class="">
-              <a href="./destination/index.html" rel="history" class="image-link">
+              <a
+                href="./destination/index.html"
+                rel="history"
+                class="image-link"
+              >
                 <img
                   width="8192"
                   height="4608"
@@ -773,7 +853,11 @@
                 >
                 <br />
                 <small
-                  ><br />Site-specific installation along the Erie Canal in Syracuse, visualizing the time and distance of cargo movement between locks. The projection transforms data into a dynamic display that connects historical infrastructure with contemporary experience.</small
+                  ><br />Site-specific installation along the Erie Canal in
+                  Syracuse, visualizing the time and distance of cargo movement
+                  between locks. The projection transforms data into a dynamic
+                  display that connects historical infrastructure with
+                  contemporary experience.</small
                 >
               </div>
             </div>
@@ -809,7 +893,10 @@
                 >
                 <br />
                 <small
-                  ><br />Design experiment exploring how material behavior can define garment structure. Using balloons and stockings, the study investigates elasticity, gravity, and tension to generate natural draping formed by weight.</small
+                  ><br />Design experiment exploring how material behavior can
+                  define garment structure. Using balloons and stockings, the
+                  study investigates elasticity, gravity, and tension to
+                  generate natural draping formed by weight.</small
                 >
               </div>
             </div>
@@ -845,7 +932,11 @@
                 >
                 <br />
                 <small
-                  ><br />Urban design proposal reimagining the Chiang Kai-shek Memorial Hall Plaza as a space where memory and everyday life coexist. The project introduces new programs and circulation to soften its monumental character and reconnect the site with contemporary urban life.</small
+                  ><br />Urban design proposal reimagining the Chiang Kai-shek
+                  Memorial Hall Plaza as a space where memory and everyday life
+                  coexist. The project introduces new programs and circulation
+                  to soften its monumental character and reconnect the site with
+                  contemporary urban life.</small
                 >
               </div>
             </div>
@@ -881,7 +972,12 @@
                 >
                 <br />
                 <small
-                  ><br />Expansion proposal for the Taipei Fine Arts Museum addressing the lack of collection space in the existing building. The project introduces a new east wing and explores the spatial dialogue between old and new museums, reinterpreting how exhibitions may evolve in the future.</small
+                  ><br />Expansion proposal for the Taipei Fine Arts Museum
+                  addressing the lack of collection space in the existing
+                  building. The project introduces a new east wing and explores
+                  the spatial dialogue between old and new museums,
+                  reinterpreting how exhibitions may evolve in the
+                  future.</small
                 >
               </div>
             </div>
@@ -917,7 +1013,11 @@
                 >
                 <br />
                 <small
-                  ><br />Housing design exploring future modes of living and community formation within the urban environment. The project introduces the concept of porosity to challenge standardized high-rise typologies and respond to shifting family structures and short-term residency patterns.</small
+                  ><br />Housing design exploring future modes of living and
+                  community formation within the urban environment. The project
+                  introduces the concept of porosity to challenge standardized
+                  high-rise typologies and respond to shifting family structures
+                  and short-term residency patterns.</small
                 >
               </div>
             </div>
@@ -953,7 +1053,11 @@
                 >
                 <br />
                 <small
-                  ><br />Architectural design that mediates between old and new through form and structure. The project introduces a connective path through the site, fostering encounters and linking the building with its surroundings and the larger urban context.</small
+                  ><br />Architectural design that mediates between old and new
+                  through form and structure. The project introduces a
+                  connective path through the site, fostering encounters and
+                  linking the building with its surroundings and the larger
+                  urban context.</small
                 >
               </div>
             </div>
