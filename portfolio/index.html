@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Public Intimacy: Runway</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background-color: white;
+        color: black;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 60px;
+        font-size: 24px;
+        font-weight: normal;
+      }
+
+      .logo {
+        font-style: italic;
+        font-weight: normal;
+      }
+
+      .logo a {
+        color: black;
+        text-decoration: none;
+      }
+
+      .logo a:hover {
+        text-decoration: underline;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        color: black;
+        text-decoration: none;
+        font-weight: normal;
+      }
+
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Project Title */
+      .project-title {
+        font-size: 3.5rem;
+        font-weight: normal;
+        margin-bottom: 10px;
+        line-height: 1.1;
+      }
+
+      .project-subtitle {
+        font-size: 1.5rem;
+        font-weight: normal;
+        color: #666;
+        margin-bottom: 50px;
+      }
+
+      .project-question {
+        font-size: 1.8rem;
+        font-weight: normal;
+        margin-bottom: 40px;
+        font-style: italic;
+        color: #333;
+        line-height: 1.3;
+      }
+
+      /* Project Content */
+      .project-content {
+        max-width: 1080px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      /* Hero Image */
+      .project-hero-image {
+        width: 100%;
+        margin: 0 0 60px 0;
+        text-align: center;
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+      }
+
+      /* Fallback for browsers without aspect-ratio support */
+      @supports not (aspect-ratio: 16 / 10) {
+        .project-hero-image {
+          padding-bottom: 62.5%; /* 16:10 aspect ratio */
+          height: 0;
+        }
+
+        .project-hero-image img {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      .project-hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Desktop Layout: Title Left, Description Right */
+      .project-header {
+        display: flex;
+        gap: 80px;
+        align-items: flex-start;
+        margin-bottom: 40px;
+      }
+
+      .project-title-section {
+        width: 100%;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .project-description-section {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .project-description {
+        font-size: 1.1rem;
+        margin-bottom: 0;
+        text-align: justify;
+      }
+
+      /* Accordion Styles */
+      .accordion-items-container {
+        list-style: none;
+        margin: 60px 0;
+        padding: 0;
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .accordion-item:first-child {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .accordion-divider {
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.1);
+        opacity: 0.5;
+      }
+
+      .accordion-item__click-target {
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 19px 0 15px 0;
+        font-family: inherit;
+        outline: none;
+      }
+
+      .accordion-item__click-target:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      .accordion-item__title {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding-right: 14px;
+        text-align: left;
+      }
+
+      .accordion-icon-container {
+        height: 14px;
+        width: 14px;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .plus {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .plus__horizontal-line,
+      .plus__vertical-line {
+        position: absolute;
+        background-color: #333;
+        transition: transform 0.3s ease;
+      }
+
+      .plus__horizontal-line {
+        width: 100%;
+        height: 1.5px;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+
+      .plus__vertical-line {
+        width: 1.5px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .accordion-icon-container[data-is-open="true"] .plus__vertical-line {
+        transform: translateX(-50%) rotate(90deg);
+        opacity: 0;
+      }
+
+      .accordion-item__dropdown {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .accordion-item__dropdown.active {
+        max-height: 200px;
+      }
+
+      .accordion-item__description {
+        padding: 0 0 30px 0;
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.6;
+        min-width: 70%;
+        max-width: 300px;
+      }
+
+      /* Project Sections */
+      .project-section {
+        margin-bottom: 50px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .section-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: justify;
+      }
+
+      /* Simple Image Sections */
+      .image-section {
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .image-section img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      /* Video Section */
+      .video-section {
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        background: #f8f8f8;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+      }
+
+      .video-description {
+        font-size: 1rem;
+        color: #666;
+        margin-top: 15px;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      /* Image Gallery Carousel */
+      .gallery-slideshow {
+        margin: 60px 0;
+        position: relative;
+        background: white;
+        border-radius: 8px;
+      }
+
+      .gallery-slideshow-wrapper {
+        position: relative;
+        padding: 20px;
+        min-height: 400px;
+      }
+
+      .gallery-slideshow-container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .gallery-slideshow-main {
+        flex: 1;
+        position: relative;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #f8f8f8;
+        /* Fallback for browsers without aspect-ratio support */
+        padding-bottom: 62.5%; /* 16:10 aspect ratio (10/16 * 100%) */
+      }
+
+      /* Modern browsers with aspect-ratio support */
+      @supports (aspect-ratio: 16 / 10) {
+        .gallery-slideshow-main {
+          aspect-ratio: 16 / 10;
+          padding-bottom: 0;
+        }
+      }
+
+      .gallery-slideshow-list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* When aspect-ratio is supported, use relative positioning */
+      @supports (aspect-ratio: 16 / 10) {
+        .gallery-slideshow-list {
+          position: relative;
+        }
+      }
+
+      .gallery-slideshow-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .gallery-slideshow-item.active {
+        opacity: 1;
+      }
+
+      .gallery-slideshow-item-wrapper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .gallery-slideshow-item-src {
+        width: 100%;
+        height: 100%;
+      }
+
+      .gallery-slideshow-item-img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .gallery-slideshow-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease;
+        display: block;
+      }
+
+      .gallery-slideshow-item:hover img {
+        transform: scale(1.02);
+      }
+
+      /* Gallery Controls - Left and Right of Image */
+      .gallery-slideshow-control {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .gallery-slideshow-control-btn {
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-slideshow-control-btn:hover {
+        background: rgba(255, 255, 255, 0.95);
+        transform: scale(1.05);
+      }
+
+      .gallery-slideshow-control-btn:active {
+        transform: scale(0.95);
+      }
+
+      .gallery-slideshow-control-btn svg {
+        width: 14px;
+        height: 14px;
+        stroke: #333;
+        stroke-width: 2;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-slideshow-control-btn:hover svg {
+        stroke: #000;
+      }
+
+      /* Mobile controls (hidden on desktop) */
+      .gallery-slideshow-mobile-controls {
+        display: none;
+      }
+
+      /* Gallery Thumbnails */
+      .gallery-slideshow-thumbnails {
+        padding: 30px 20px 20px;
+        background: white;
+      }
+
+      .gallery-slideshow-thumbnails-scroll {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+      }
+
+      .gallery-slideshow-thumbnails-thumb {
+        width: 80px;
+        height: 80px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: none;
+        padding: 0;
+      }
+
+      .gallery-slideshow-thumbnails-thumb:hover {
+        transform: scale(1.05);
+        border-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-slideshow-thumbnails-thumb.active {
+        border-color: #333;
+      }
+
+      .gallery-slideshow-thumbnails-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-slideshow-thumbnails-thumb:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Legacy gallery images */
+      .gallery-image {
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+      }
+
+      /* Navigation */
+      .project-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 60px 0 40px 0;
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+      }
+
+      .nav-link {
+        color: #666;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      .nav-link:hover {
+        text-decoration: underline;
+        color: #333;
+      }
+
+      /* Footer */
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 60px;
+        font-size: 18px;
+        border-top: 1px solid #eee;
+        padding-top: 40px;
+      }
+
+      .contact {
+        color: black;
+        text-decoration: none;
+      }
+
+      .contact:hover {
+        text-decoration: underline;
+      }
+
+      .copyright {
+        opacity: 0.7;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .header {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+          font-size: 20px;
+        }
+
+        .nav-links {
+          gap: 20px;
+        }
+
+        .page-title {
+          font-size: 2.5rem;
+          text-align: center;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .footer {
+          flex-direction: column;
+          gap: 10px;
+          text-align: center;
+          font-size: 16px;
+        }
+
+        .project-title {
+          font-size: 2rem;
+          text-align: center;
+          line-height: 1.1;
+        }
+
+        .project-question {
+          font-size: 1.2rem;
+          line-height: 1.3;
+        }
+
+        /* Mobile: Stack title and description vertically */
+        .project-header {
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .project-title {
+          font-size: 2rem;
+          text-align: center;
+          line-height: 1.1;
+        }
+
+        .project-hero-image {
+          margin-bottom: 40px;
+        }
+
+        .project-subtitle {
+          font-size: 1.2rem;
+          font-weight: normal;
+          color: #666;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .project-question {
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .project-description {
+          text-align: left;
+          font-size: 1rem;
+          line-height: 1.4;
+        }
+
+        .accordion-items-container {
+          margin: 40px 0;
+        }
+
+        .accordion-item__title {
+          font-size: 0.75rem;
+        }
+
+        .project-nav {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .gallery-slideshow-wrapper {
+          padding: 15px;
+          min-height: auto;
+          width: 100%;
+        }
+
+        .gallery-slideshow {
+          width: 100%;
+          margin: 40px 0;
+        }
+
+        .gallery-slideshow-container {
+          flex-direction: column;
+          gap: 20px;
+          align-items: stretch;
+          max-width: none;
+          width: 100%;
+        }
+
+        .gallery-slideshow-main {
+          width: 100%;
+          flex: none;
+          border-radius: 8px;
+          overflow: hidden;
+          background: #f8f8f8;
+          /* Maintain same aspect ratio on mobile */
+          padding-bottom: 62.5%; /* 16:10 aspect ratio */
+        }
+
+        /* Modern mobile browsers with aspect-ratio support */
+        @supports (aspect-ratio: 16 / 10) {
+          .gallery-slideshow-main {
+            aspect-ratio: 16 / 10;
+            padding-bottom: 0;
+          }
+        }
+
+        .gallery-slideshow-list {
+          width: 100%;
+          height: 100%;
+        }
+
+        .gallery-slideshow-item {
+          width: 100% !important;
+          height: 100% !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .gallery-slideshow-item-wrapper,
+        .gallery-slideshow-item-src,
+        .gallery-slideshow-item-img {
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        .gallery-slideshow-item img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+        }
+
+        /* Ensure figure elements don't collapse */
+        figure.gallery-slideshow-item {
+          margin: 0;
+          padding: 0;
+          width: 100% !important;
+          height: 100% !important;
+          flex-shrink: 0;
+        }
+
+        /* Hide desktop side controls on mobile */
+        .gallery-slideshow-control {
+          display: none;
+        }
+
+        /* Show mobile controls below image */
+        .gallery-slideshow-mobile-controls {
+          display: flex !important;
+          justify-content: center;
+          gap: 40px;
+          margin-top: 20px;
+        }
+
+        .gallery-slideshow-control-btn {
+          width: 45px;
+          height: 45px;
+        }
+
+        .gallery-slideshow-control-btn svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .gallery-slideshow-thumbnails-thumb {
+          width: 70px;
+          height: 70px;
+        }
+
+        .gallery-slideshow-thumbnails-scroll {
+          gap: 15px;
+        }
+
+        /* Disable hover effects on mobile for better touch experience */
+        .gallery-slideshow-item:hover img {
+          transform: none;
+        }
+
+        .gallery-slideshow-thumbnails-thumb:hover img {
+          transform: none;
+        }
+
+        /* Mobile image sections */
+        .image-section {
+          margin: 40px 0;
+        }
+
+        /* Mobile video sections */
+        .video-section {
+          margin: 40px 0;
+        }
+
+        .video-container {
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-title {
+          font-size: 1rem;
+          margin-bottom: 15px;
+        }
+
+        .video-description {
+          font-size: 0.85rem;
+          margin-top: 12px;
+          text-align: left;
+          padding: 0 10px;
+        }
+
+        .section-content {
+          font-size: 0.875rem;
+          line-height: 1.25;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+          line-height: 1.7rem;
+        }
+
+        .video-description {
+          font-size: 0.7rem;
+          margin-top: 12px;
+          text-align: left;
+          padding: 0 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="logo"><a href="../index.html">Monica Hsieh</a></h1>
+        <nav class="nav-links">
+          <a href="../about/index.html">ABOUT</a>
+        </nav>
+      </header>
+
+      <div class="project-content">
+        <!-- Hero Image -->
+        <div class="project-hero-image">
+          <img src="../images/PORTFOLIO/P_01.jpg" alt="Slope House Hero" />
+        </div>
+
+        <!-- Desktop: Title Left, Description Right -->
+        <div class="project-header">
+          <div class="project-title-section">
+            <h1 class="project-title">MENG CHIH (MONICA) HSIEH_PORTFOLIO</h1>
+            <h2 class="project-subtitle">Retail & Experiential Designer</h2>
+            </h3>
+          </div>
+
+          <div class="project-description-section">
+            <p class="project-description">
+              I am a spatial designer bridging architectural rigor with sensory storytelling. Drawing from professional experience at Ringo Studio and CMLA, I translate brand concepts into technical realities, from bespoke sculptural fixtures to comprehensive CD sets.
+
+My approach treats the “store as a stage,” utilizing material experimentation and strategic programming to redefine retail as a performative space. Moving forward, I aim to design immersive, high-touch environments that challenge traditional shopping experiences through narrative-driven design and technical precision.
+            </p>
+          </div>
+        </div>
+
+        <ul
+          class="accordion-items-container"
+          data-should-allow-multiple-open-items="true"
+        >
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-year"
+                aria-controls="dropdown-year"
+              >
+                <span class="accordion-item__title">YEAR</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-year"
+              aria-labelledby="button-year"
+            >
+              <div class="accordion-item__description">
+                <p>2025</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="accordion-item">
+            <h4
+              class="accordion-item__title-wrapper"
+              role="heading"
+              aria-level="3"
+            >
+              <button
+                class="accordion-item__click-target"
+                aria-expanded="false"
+                id="button-program"
+                aria-controls="dropdown-program"
+              >
+                <span class="accordion-item__title">PROGRAM</span>
+                <div
+                  class="accordion-icon-container"
+                  data-is-open="false"
+                  aria-hidden="true"
+                >
+                  <div class="plus">
+                    <div class="plus__horizontal-line"></div>
+                    <div class="plus__vertical-line"></div>
+                  </div>
+                </div>
+              </button>
+            </h4>
+            <div
+              class="accordion-item__dropdown"
+              role="region"
+              id="dropdown-program"
+              aria-labelledby="button-program"
+            >
+              <div class="accordion-item__description">
+                <p>Retail, Scenography, Architecture</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="project-section">
+          <h4 class="section-title">Tracing the Evolution of Runway Space</h4>
+          <p class="section-content">
+            This study began with an observation of archival photographs and
+            historical footage of runway shows. By mapping these materials
+            chronologically, a significant turning point emerged around 1971,
+            when scenography and exhibition design began to influence fashion
+            presentation. From that moment, runway shows evolved beyond
+            showcasing garments to constructing immersive spatial narratives.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/RUN_03.jpg" alt="Co-living Landscape" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">
+            Evolving Interactions: From Intimacy to Influence
+          </h4>
+          <p class="section-content">
+            The diagrams trace how runway spaces evolved from intimate salon
+            rooms to expansive public venues. Early shows were exclusive and
+            close to the audience, later shifting to linear catwalks and
+            brand-specific settings. With technological progress, temporary
+            industrial and outdoor stages emerged, reflecting fashion’s move
+            toward inclusivity and public presence.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/RUN_01.jpg" alt="Co-living Landscape" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">From Private Salon to Global Screen</h4>
+          <p class="section-content">
+            The evolution of media and technology has expanded the reach of
+            runway shows beyond their original private audiences. Early
+            presentations were limited to invited guests and later shared
+            through print media. As photography and fashion magazines emerged,
+            exposure accelerated and reached broader social circles. The rise of
+            digital platforms introduced bloggers and online viewers, eventually
+            leading to today’s celebrity- and influencer-driven audiences, where
+            live streaming allows global participation in real time.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/RUN_07.jpg" alt="Co-living Landscape" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Audience and Performer Interaction</h4>
+          <p class="section-content">
+            The final diagrams zoom in on how performers and audiences interact.
+            Early salons placed viewers close to the garments, encouraging
+            direct observation and tactile engagement. With the emergence of
+            linear catwalks and photographers, distance increased and focus
+            shifted from clothing details to atmosphere and brand identity.
+            Today, audiences often experience the show through screens,
+            extending participation beyond the physical space.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/RUN_02.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Design Premise: Between Runway and Retail</h4>
+          <p class="section-content">
+            When viewed through a shared spatial lens, runway shows and retail spaces reveal parallel evolutions toward curated, staged, and fast-paced experiences. Positioned between event and stage, the pop-up emerges as a spatial hybrid that bridges the two. This intersection becomes the conceptual starting point of Tempo.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_27.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Visual Identity System: Between Fast and Slow</h4>
+          <p class="section-content">
+            Tempo positions the pop-up between runway and retail, translating speed and performance into a spatial and graphic framework. The identity originates from an animation-based system exploring blur, drag, and ghosted traces; in this portfolio, selected still frames represent that motion over time. Through smeared, low-tech letterforms, the logo reflects the brand's mission to create moments of stillness within fast, temporary fashion culture.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_02.gif" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_01.gif" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_03.jpg" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_04.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Visual Concept: Motion and Blur</h4>
+          <p class="section-content">
+            Inspired by fast culture, Tempo works with blur, motion, and partial visibility to explore the tension between speed and stillness, shaping its materials, graphics, and pop-up design.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_05.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Consumer Journey: From Physical Pause to Digital Loop</h4>
+          <p class="section-content">
+            Tempo’s consumer journey begins with a physical photobooth rather than social media.
+For most visitors, this is their first encounter with the brand. The photo strip serves as both a record and a ticket into the main pop-up.
+
+Inside, visitors begin as the audience. After trying on the garments, they step onto the central runway and become performers.
+
+At the end of the experience, a digitally linked receipt extends the encounter beyond the physical space and leads to the next pop-up.
+This cyclical journey reflects Tempo’s core tension between speed and stillness, moving from a deliberate physical pause to a fast digital loop.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_06.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Spatial Layout: Runway-Based Organization</h4>
+          <p class="section-content">
+            The pop-up is organized around a central runway that structures both circulation and display. Apparel and footwear are positioned on opposite sides, while the counter and fitting rooms anchor the space at the rear. Ceiling-mounted projectors introduce moving logos and visuals, allowing motion to blur across products, bodies, and space.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_07.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Spatial Section: Visual Boundaries and Sightlines</h4>
+          <p class="section-content">
+            The section reveals projectors mounted to suspended ceiling fixtures, working with haze to create an invisible visual layer between products and visitors. This permeable boundary allows bodies to pass through while visually distorting movement and perception. A one-way mirror separates the runway from the shopping areas, allowing the audience to observe performers without being seen.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_08.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Storefront: Framing the Runway to the Street</h4>
+          <p class="section-content">
+            The storefront uses metal and frosted glass to create a cool, fashion-forward presence. Only the central runway opens to the street through one-way mirror panels, allowing passersby to view the interior while maintaining visual privacy for those inside. This condition turns the street into an extension of the show.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_13.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Shopping Area: Browsing as Spectatorship </h4>
+          <p class="section-content">
+            Upon entering, visitors move through shopping areas flanking the central runway, browsing products while observing the activity along it and remaining in the role of the audience.
+
+The shopping areas pair reflective metal display systems with rough gray concrete. Linear lighting reinforces the spatial rhythm and sense of forward movement through the space.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_14.jpg" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_15.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Detail: Rack and Lighting Calibration</h4>
+          <p class="section-content">
+            The rack system is calibrated to eye level for viewing. Suspended lighting heights are set by projection geometry to avoid direct visual exposure. Each module displays coordinated outfits, with tops above and lower garments below.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_10.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Runway: From Audience to Performer</h4>
+          <p class="section-content">
+            After changing, visitors step onto the central runway, the only mirrored space, where movement and attention are drawn inward and the role shifts from audience to performer.
+
+Slightly angled mirrors and a continuous linear lighting pattern create shifting views along the runway, echoing the rhythm of the brand, Tempo.
+
+At the end of the runway, openings between mirrors frame views back toward the shopping areas. Reflections alternate between self and others, sharp and blurred, creating a layered visual condition that encourages prolonged engagement.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_12.jpg" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_11.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Detail: Light and Visibility</h4>
+          <p class="section-content">
+            The detail drawings show linear ceiling lighting designed as reflected light, creating a softer illumination. One-way mirrors along the runway and street-facing wall allow views into the space, extending the audience beyond the interior.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_09.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Visual Boundary</h4>
+          <p class="section-content">
+           Projectors and haze machines work together to form an invisible visual boundary within the space. This atmospheric layer blends dynamic visual effects with static displays, subtly distorting perception and slowing the pace of movement and viewing.
+          </p>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_16.gif" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_17.gif" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_18.gif" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Physical Artifacts: From Transaction to Keepsake</h4>
+          <p class="section-content">
+            Blurred imagery in the lookbook reflects fast fashion’s partial visibility while keeping product information clear. Visitor-embedded photo tickets and receipts transform disposable transactions into keepsakes, extending the pop-up beyond the space.
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_19.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Blurred Photobooth</h4>
+          <p class="section-content">
+            A blurred photobooth appears at unexpected moments in the city, generating photo tickets that serve as entry passes to the main pop-up event.
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_20.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Signage</h4>
+          <p class="section-content">
+            The storefront signage uses a metal frame and dark mirrored monitor to translate the logo’s motion into a dynamic visual presence at the entrance.
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_22.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Urban Visibility</h4>
+          <p class="section-content">
+            Brand posters at bus stops extend Tempo’s presence across the city, using varied visual treatments to attract attention beyond the photobooth.
+        </div>
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_21.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-section">
+          <h4 class="section-title">Digital Artifacts: Interaction and Circulation</h4>
+          <p class="section-content">
+            The website reveals product information through cursor interaction, encouraging slower and more deliberate exploration. Instagram stories and tagging circulate brand exposure, linking digital engagement to the pop-up experience.
+
+        <div class="image-section">
+          <img src="../images/FRTS/TEMPO_23.jpg" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_24.jpg" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_25.jpg" alt="Two Ground Levels" />
+          <img src="../images/FRTS/TEMPO_26.jpg" alt="Two Ground Levels" />
+        </div>
+
+        <div class="project-nav">
+          <a href="#" class="nav-link"></a>
+          <a href="../ch/index.html" class="nav-link">Next: CHILLHOUSE →</a>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <a href="mailto:ydesignspaces@gmail.com" class="contact"
+          >monicahsieh08@gmail.com</a
+        >
+        <div class="copyright">©Monica Hsieh</div>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Accordion functionality
+        const accordionButtons = document.querySelectorAll(
+          ".accordion-item__click-target"
+        );
+
+        accordionButtons.forEach(button => {
+          button.addEventListener("click", function () {
+            const isExpanded = this.getAttribute("aria-expanded") === "true";
+            const dropdown = document.getElementById(
+              this.getAttribute("aria-controls")
+            );
+            const icon = this.querySelector(".accordion-icon-container");
+
+            if (isExpanded) {
+              this.setAttribute("aria-expanded", "false");
+              dropdown.classList.remove("active");
+              icon.setAttribute("data-is-open", "false");
+            } else {
+              this.setAttribute("aria-expanded", "true");
+              dropdown.classList.add("active");
+              icon.setAttribute("data-is-open", "true");
+            }
+          });
+        });
+
+        // Gallery slideshow functionality
+        const slides = document.querySelectorAll(".gallery-slideshow-item");
+        const thumbnails = document.querySelectorAll(
+          ".gallery-slideshow-thumbnails-thumb"
+        );
+        const prevBtn = document.querySelector(
+          ".gallery-slideshow-control-prev .gallery-slideshow-control-btn"
+        );
+        const nextBtn = document.querySelector(
+          ".gallery-slideshow-control-next .gallery-slideshow-control-btn"
+        );
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          // Hide all slides
+          slides.forEach(slide => slide.classList.remove("active"));
+          thumbnails.forEach(thumb => thumb.classList.remove("active"));
+
+          // Show current slide
+          if (slides[index]) {
+            slides[index].classList.add("active");
+          }
+          if (thumbnails[index]) {
+            thumbnails[index].classList.add("active");
+          }
+
+          currentSlide = index;
+        }
+
+        function nextSlide() {
+          const next = (currentSlide + 1) % slides.length;
+          showSlide(next);
+        }
+
+        function prevSlide() {
+          const prev = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(prev);
+        }
+
+        // Event listeners for desktop controls
+        if (nextBtn) {
+          nextBtn.addEventListener("click", nextSlide);
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener("click", prevSlide);
+        }
+
+        // Event listeners for mobile controls
+        const mobilePrevBtn = document.querySelector(".mobile-prev-btn");
+        const mobileNextBtn = document.querySelector(".mobile-next-btn");
+
+        if (mobileNextBtn) {
+          mobileNextBtn.addEventListener("click", nextSlide);
+        }
+
+        if (mobilePrevBtn) {
+          mobilePrevBtn.addEventListener("click", prevSlide);
+        }
+
+        // Event listeners for thumbnails
+        thumbnails.forEach((thumb, index) => {
+          thumb.addEventListener("click", () => showSlide(index));
+        });
+
+        // Auto-advance slides (optional)
+        // setInterval(nextSlide, 5000);
+      });
+    </script>
+  </body>
+</html>
